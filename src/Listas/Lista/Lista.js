@@ -5,7 +5,7 @@ import { TouchableOpacity } from "react-native-web";
 const Lista = ({Titulo, removeLista, IndexLista}) => {
     return (
         <>
-            <View style={styles.lista} key={IndexLista}>
+            <View style={styles.lista}>
                 {/* <Text>AAA</Text> */}
                 <View>
                     <Text>{Titulo}</Text>

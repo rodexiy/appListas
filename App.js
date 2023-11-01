@@ -1,18 +1,21 @@
 import { StatusBar } from 'expo-status-bar';
-import { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import Listas from "./components/Listas"
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
+import Listas from './src/Listas';
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   
-  const [ArrayListas, setArrayListas] = useState([ {Titulo: "aaa"} ])
 
   return (
-    <View style={styles.container}>
-      <Text>Minhas listas</Text>
-      <Listas Titulo="Titulo teste" ArrayListas={ArrayListas} setArrayListas={setArrayListas}/>
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Listas" component={Listas} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
