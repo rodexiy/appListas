@@ -48,13 +48,23 @@ const Listas = ({route, navigation}) => {
         setListas(novaLista)
     }
 
+    const abrirLista = (IndexLista) => {
+        console.log(IndexLista)
+        navigation.navigate("Tarefas", {
+            IndexLista: IndexLista,
+            lista: listas[IndexLista],
+            listas: listas,
+            setListas: setListas
+        })
+    }
+
     const carregarListas = useMemo(() => {
         return (
             <View style={{ width: "100%", alignItems: "center", gap: 8 }}>
                 {
                     listas.map((item, index) => {
                         return (
-                            <Lista Titulo={item.titulo} IndexLista={index} key={index} listas={listas} setListas={setListas} goEditarLista={goEditarLista} />
+                            <Lista Titulo={item.titulo} IndexLista={index} key={index} listas={listas} setListas={setListas} goEditarLista={goEditarLista} abrirLista={abrirLista} />
                         )
                     })
                 }

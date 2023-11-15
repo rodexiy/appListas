@@ -4,31 +4,27 @@ import { Text, TextInput, View, StyleSheet, Touchable, Pressable } from "react-n
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import metadata from './../storage.medata.json';
 
-
-function CriarEditarLista({ route, navigation}) {
-    const { acao, listas, indexLista, setLista} = route.params;
-    const [nomeLista, setNomeLista] = useState("")
+function CriarEditarTarefa({ route, navigation}) {
+    const { acao, listas, setListas, IndexLista, IndexTarefa } = route.params;
+    const [nomeTarefa, setNomeTarefa] = useState("")
 
     const buttonPressed = () => {
-        if (nomeLista.length == 0) {
+        let lista = listas[IndexLista]
+        if (nomeTarefa.length == 0) {
             alert("Nome inválido!")
             return
         }
 
-        let novaLista
+        let novaTarefas 
         if (acao == "Criar") {
-            novaLista = [{titulo: nomeLista, ultimaMod:(new Date().toLocaleString()), tarefas:[]}, ...listas];
-        }else if(acao == "Editar") {
-            novaLista = listas
-            console.log(indexLista)
-            var lista = novaLista[indexLista]
-            lista.titulo = nomeLista
-            lista.ultimaMod = new Date().toLocaleString()
+            novaTarefas = [{titulo: nomeTarefa, ultimaMod:(new Date().toLocaleString())}, ...lista.tarefas];
+            lista.tarefas = novaTarefas
         }
-
-        AsyncStorage.setItem(metadata.LISTAS, JSON.stringify(novaLista));
-
-        navigation.navigate("Listas", {
+        console.log(setListas)
+        setListas(listas)
+        // AsyncStorage.setItem(metadata.LISTAS, JSON.stringify(listas));
+        navigation.navigate("Tarefas", {
+            lista: lista
         });
     }
 
@@ -37,9 +33,9 @@ function CriarEditarLista({ route, navigation}) {
     return (
         <>
             <View style={styles.container}>
-                <TextInput style={styles.textInput} placeholder={"Nome da lista"} onChangeText={setNomeLista} />
+                <TextInput style={styles.textInput} placeholder={"Nome da tarefa"} onChangeText={setNomeTarefa} />
                 <Pressable style={styles.pressable} onPress={buttonPressed}> 
-                    <Text style={styles.pressableText}>{acao + " lista"}</Text>
+                    <Text style={styles.pressableText}>{acao + " tarefa"}</Text>
                 </Pressable>
             </View>
         </>
@@ -77,4 +73,4 @@ const styles = StyleSheet.create({
         color: "#fff",
     }
 });
-export default CriarEditarLista
+export default CriarEditarTarefa

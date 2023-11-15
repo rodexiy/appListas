@@ -5,6 +5,9 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import Listas from './src/Listas';
 import CriarEditarLista from './src/CriarEditarLista'
+import Tarefas from './src/Tarefas'
+import CriarEditarTarefa from './src/CriarEditarTarefa';
+
 
 const Stack = createNativeStackNavigator();
 
@@ -16,6 +19,8 @@ export default function App() {
       <Stack.Navigator>
         <Stack.Screen name="Listas" component={Listas} />
         <Stack.Screen name="CriarEditarLista" component={CriarEditarLista} />
+        <Stack.Screen name="Tarefas" component={Tarefas} />
+        <Stack.Screen name="CriarEditarTarefa" component={CriarEditarTarefa} />
       </Stack.Navigator>
     </NavigationContainer>
   );

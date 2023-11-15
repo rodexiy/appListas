@@ -1,28 +1,25 @@
 import react from "react";
 import { StyleSheet, Button, Text, View, Pressable } from "react-native";
-import { TouchableOpacity } from "react-native-web";
 
 
-const Lista = ({Titulo, listas, setListas, IndexLista, goEditarLista, abrirLista}) => {
-
-    const removeLista = () => {
-        var novaLista = [...listas];
-        novaLista.splice(IndexLista, 1);
-        setListas(novaLista);
+const Tarefa = ({Titulo, listas, setListas, IndexLista, IndexTarefa}) => {
+    const removeTarefa = () => {
+        let novalista = [...listas]
+        console.log(novalista)
+        novalista[IndexLista].tarefas.splice(IndexTarefa, 1);
+        setListas(novalista)
     }
 
     return (
         <>
-        <View>
-            <Pressable style={styles.lista} onPress={() => {abrirLista(IndexLista)}}>
+            <View style={styles.lista}>
                 <Text>{Titulo}</Text>
 
                 <View style={styles.containerbotoes}>
-                    <Pressable style={styles.removeButton} onPress={removeLista} />
-                    <Pressable onPress={() => goEditarLista(IndexLista)} style={styles.editButton} />
+                    <Pressable style={styles.removeButton} onPress={removeTarefa} />
+                    <Pressable  style={styles.editButton} />
                 </View>
-            </Pressable>
-        </View>
+            </View>
         </>
     )
 }
@@ -68,4 +65,4 @@ const styles = StyleSheet.create({
     }
   });
 
-export default Lista;
+export default Tarefa;
